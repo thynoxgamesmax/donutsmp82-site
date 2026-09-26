@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DonutSMP82 | Minecraft Server</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#05070d;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(0,255,255,.12),transparent 30%),
+        radial-gradient(circle at 85% 70%,rgba(120,50,255,.13),transparent 30%),
+        linear-gradient(135deg,#05070d,#090d18 50%,#05070d);
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    opacity:.18;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:45px 45px;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(4,7,14,.72);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(18px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-.5px;
+}
+
+.logo-box{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,#00e5ff,#694cff);
+    box-shadow:0 0 30px rgba(0,229,255,.25);
+    font-size:22px;
+}
+
+.logo span{
+    color:#00eaff;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+.nav-links a{
+    color:#aeb6c8;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.btn{
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
+    padding:12px 18px;
+    border-radius:11px;
+    font-weight:800;
+    font-size:13px;
+    transition:.25s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.btn-primary{
+    background:linear-gradient(135deg,#00d9ff,#6850ff);
+    box-shadow:0 8px 30px rgba(0,210,255,.18);
+}
+
+.btn-dark{
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.btn-red{
+    background:#ef4444;
+}
+
+/* HERO */
+
+.hero{
+    min-height:850px;
+    padding:150px 6% 80px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.hero-content{
+    max-width:1050px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 15px;
+    border:1px solid rgba(0,238,255,.2);
+    background:rgba(0,238,255,.06);
+    border-radius:100px;
+    color:#8cf7ff;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.online-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#39ff88;
+    box-shadow:0 0 12px #39ff88;
+}
+
+.hero h1{
+    font-size:clamp(48px,8vw,100px);
+    line-height:.95;
+    letter-spacing:-5px;
+    font-weight:900;
+}
+
+.gradient{
+    background:linear-gradient(90deg,#fff,#66edff,#7b5cff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:650px;
+    margin:25px auto;
+    color:#9ba5b8;
+    font-size:17px;
+    line-height:1.7;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:30px;
+}
+
+.ip-box{
+    margin:35px auto 0;
+    max-width:500px;
+    padding:14px;
+    border-radius:15px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.ip-text{
+    text-align:left;
+}
+
+.ip-text small{
+    color:#6f7a90;
+    display:block;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.ip-text strong{
+    font-size:14px;
+}
+
+.copy-btn{
+    padding:10px 14px;
+}
+
+/* SECTIONS */
+
+section{
+    padding:100px 6%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title span{
+    color:#00e5ff;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-weight:800;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-top:10px;
+    letter-spacing:-2px;
+}
+
+.section-title p{
+    color:#7f899c;
+    margin-top:10px;
+}
+
+/* CARDS */
+
+.grid{
+    max-width:1150px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.card{
+    background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:28px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    border-color:rgba(0,225,255,.28);
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.icon{
+    width:50px;
+    height:50px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:rgba(0,229,255,.08);
+    font-size:23px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    margin-bottom:9px;
+}
+
+.card p{
+    color:#7f899c;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* STORE */
+
+.store-card{
+    text-align:center;
+    position:relative;
+}
+
+.store-card.featured{
+    border-color:rgba(0,229,255,.45);
+    box-shadow:0 0 45px rgba(0,229,255,.07);
+}
+
+.popular{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:9px;
+    background:#00d9ff;
+    color:#001014;
+    padding:6px 9px;
+    border-radius:7px;
+    font-weight:900;
+}
+
+.rank{
+    font-size:27px;
+    font-weight:900;
+    margin:10px 0;
+}
+
+.price{
+    font-size:35px;
+    font-weight:900;
+    margin:20px 0;
+}
+
+.price span{
+    color:#717b90;
+    font-size:12px;
+    font-weight:500;
+}
+
+.store-card ul{
+    list-style:none;
+    text-align:left;
+    margin:20px 0;
+}
+
+.store-card li{
+    color:#aeb6c8;
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    font-size:13px;
+}
+
+/* ACCOUNT */
+
+.account-area{
+    max-width:800px;
+    margin:auto;
+}
+
+.account-box{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:22px;
+    padding:30px;
+}
+
+.form{
+    display:grid;
+    gap:13px;
+}
+
+.input{
+    width:100%;
+    padding:14px 16px;
+    border-radius:11px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#090d16;
+    color:#fff;
+    outline:none;
+}
+
+.input:focus{
+    border-color:#00d9ff;
+}
+
+.account-info{
+    display:none;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.avatar{
+    width:60px;
+    height:60px;
+    display:grid;
+    place-items:center;
+    border-radius:16px;
+    background:linear-gradient(135deg,#00d9ff,#694cff);
+    font-size:25px;
+    font-weight:900;
+}
+
+.user-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.username{
+    font-size:20px;
+    font-weight:900;
+}
+
+.credit{
+    color:#ffd43b;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* TICKETS */
+
+.ticket-list{
+    margin-top:20px;
+    display:grid;
+    gap:10px;
+}
+
+.ticket{
+    padding:17px;
+    background:#090d16;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:13px;
+}
+
+.ticket small{
+    color:#69758b;
+}
+
+/* APPLICATION */
+
+.application{
+    max-width:900px;
+    margin:auto;
+    padding:50px;
+    text-align:center;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 50% 0,rgba(0,229,255,.12),transparent 45%),
+        rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.09);
+}
+
+.application h2{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+.application p{
+    color:#818ca0;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:45px 6%;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#657086;
+    text-align:center;
+    font-size:12px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:450px;
+    background:#0a0e18;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 30px 100px rgba(0,0,0,.6);
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.close{
+    cursor:pointer;
+    color:#8a94a7;
+    font-size:22px;
+}
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    z-index:999;
+    background:#111827;
+    border:1px solid rgba(255,255,255,.1);
+    padding:14px 18px;
+    border-radius:12px;
+    display:none;
+    box-shadow:0 10px 40px rgba(0,0,0,.4);
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+    .nav-links{
+        display:none;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:750px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .application{
+        padding:30px 20px;
+    }
+
+    .ip-box{
+        flex-direction:column;
+    }
+
+    .ip-text{
+        text-align:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        <div class="logo-box">🍩</div>
+        DONUT<span>SMP82</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#features">Özellikler</a>
+        <a href="#store">Mağaza</a>
+        <a href="#account">Hesap</a>
+        <a href="#tickets">Destek</a>
+    </div>
+
+    <div class="nav-right">
+        <a class="btn btn-dark" href="https://discord.com/channels/1553095090044407989" target="_blank">
+            💬 Discord
+        </a>
+
+        <button class="btn btn-primary" onclick="openAuth()">
+            👤 Hesap
+        </button>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            <span class="online-dot"></span>
+            DONUTSMP82 ONLINE
+        </div>
+
+        <h1>
+            DONUT<span class="gradient">SMP82</span>
+        </h1>
+
+        <p>
+            Yeni nesil Minecraft deneyimine katıl.
+            Arkadaşlarınla oyna, ekonomini geliştir,
+            savaş ve kendi hikayeni oluştur.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button class="btn btn-primary" onclick="copyIP()">
+                🎮 Sunucuya Katıl
+            </button>
+
+            <a class="btn btn-dark"
+               href="https://discord.com/channels/1553095090044407989"
+               target="_blank">
+                💬 Discord'a Katıl
+            </a>
+
+        </div>
+
+        <div class="ip-box">
+
+            <div class="ip-text">
+                <small>SERVER IP</small>
+                <strong id="serverIP">donutsmp82.aternos.me</strong>
+            </div>
+
+            <button class="btn btn-primary copy-btn" onclick="copyIP()">
+                KOPYALA
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+    <div class="section-title">
+        <span>DONUTSMP82</span>
+        <h2>Neden Biz?</h2>
+        <p>Sunucuda seni bekleyen bazı özellikler.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <div class="icon">⚔️</div>
+            <h3>PvP</h3>
+            <p>
+                Oyuncularla savaş, ekip kur ve
+                sunucunun en güçlü oyuncularından biri ol.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">💰</div>
+            <h3>Ekonomi</h3>
+            <p>
+                Para kazan, alışveriş yap ve
+                kendi ekonomini oluştur.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌎</div>
+            <h3>SMP</h3>
+            <p>
+                Kendi yapını kur, arkadaşlarınla
+                dünyayı keşfet ve maceraya başla.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏆</div>
+            <h3>Etkinlikler</h3>
+            <p>
+                Düzenlenen etkinliklere katılarak
+                ödüller kazan.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">👥</div>
+            <h3>Topluluk</h3>
+            <p>
+                Discord üzerinden diğer oyuncularla
+                iletişim kur.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🛡️</div>
+            <h3>Yetkili Ekibi</h3>
+            <p>
+                Sorun yaşadığında destek ekibimizle
+                iletişime geçebilirsin.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STORE -->
+
+<section id="store">
+
+    <div class="section-title">
+        <span>STORE</span>
+        <h2>Mağaza</h2>
+        <p>Kredilerinle özel paketlere sahip ol.</p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card store-card">
+
+            <div class="rank">VIP</div>
+
+            <div class="price">
+                250 <span>Kredi</span>
+            </div>
+
+            <ul>
+                <li>✓ VIP tag</li>
+                <li>✓ Özel kit</li>
+                <li>✓ Kozmetik özellikler</li>
+                <li>✓ VIP sohbet rengi</li>
+            </ul>
+
+            <button class="btn btn-primary"
+                    onclick="buyRank('VIP',250)">
+                Satın Al
+            </button>
+
+        </div>
+
+
+        <div class="card store-card featured">
+
+            <div class="popular">POPÜLER</div>
+
+            <div class="rank">VIP+</div>
+
+            <div class="price">
+                500 <span>Kredi</span>
+            </div>
+
+            <ul>
+                <li>✓ VIP+ tag</li>
+                <li>✓ Özel kit</li>
+                <li>✓ Ekstra kozmetikler</li>
+                <li>✓ Daha fazla özellik</li>
+            </ul>
+
+            <button class="btn btn-primary"
+                    onclick="buyRank('VIP+',500)">
+                Satın Al
+            </button>
+
+        </div>
+
+
+        <div class="card store-card">
+
+            <div class="rank">ELITE</div>
+
+            <div class="price">
+                1000 <span>Kredi</span>
+            </div>
+
+            <ul>
+                <li>✓ ELITE tag</li>
+                <li>✓ Özel kit</li>
+                <li>✓ Tüm kozmetikler</li>
+                <li>✓ ELITE özellikleri</li>
+            </ul>
+
+            <button class="btn btn-primary"
+                    onclick="buyRank('ELITE',1000)">
+                Satın Al
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ACCOUNT -->
+
+<section id="account">
+
+    <div class="section-title">
+        <span>ACCOUNT</span>
+        <h2>Hesabım</h2>
+        <p>Hesabını oluştur ve kredilerini yönet.</p>
+    </div>
+
+    <div class="account-area">
+
+        <div class="account-box">
+
+            <div id="loggedOut">
+
+                <h3 style="margin-bottom:8px;">
+                    Henüz giriş yapmadın
+                </h3>
+
+                <p style="color:#788398;margin-bottom:20px;">
+                    Hesabına giriş yaparak kredi sistemini
+                    ve destek bölümünü kullanabilirsin.
+                </p>
+
+                <button class="btn btn-primary"
+                        onclick="openAuth()">
+                    Giriş Yap / Kayıt Ol
+                </button>
+
+            </div>
+
+
+            <div id="accountInfo" class="account-info">
+
+                <div class="profile">
+
+                    <div class="user-left">
+
+                        <div class="avatar" id="avatar">
+                            D
+                        </div>
+
+                        <div>
+                            <div class="username" id="profileName">
+                                Kullanıcı
+                            </div>
+
+                            <div class="credit">
+                                💰 <span id="creditAmount">0</span> Kredi
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-red"
+                            onclick="logout()">
+                        Çıkış
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TICKETS -->
+
+<section id="tickets">
+
+    <div class="section-title">
+        <span>SUPPORT</span>
+        <h2>Destek & Ticket</h2>
+        <p>Bir sorun mu var? Ticket oluştur.</p>
+    </div>
+
+    <div class="account-area">
+
+        <div class="account-box">
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+
+                <input
+                    id="ticketText"
+                    class="input"
+                    placeholder="Sorununuzu yazın..."
+                    style="flex:1;min-width:220px;"
+                >
+
+                <button class="btn btn-primary"
+                        onclick="createTicket()">
+                    🎫 Ticket Oluştur
+                </button>
+
+            </div>
+
+            <div class="ticket-list" id="ticketList">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- APPLICATION -->
+
+<section>
+
+    <div class="application">
+
+        <h2>Ekibe Katıl</h2>
+
+        <p>
+            DonutSMP82 ekibinde yer almak istiyorsan
+            başvuru formunu doldurabilirsin.
+        </p>
+
+        <a
+            class="btn btn-primary"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSeSu0LqEQWZkOW1KSwj4iukbISvvkf4MUadVuu5EppB2d13vg/viewform?usp=header"
+            target="_blank"
+        >
+            📝 Başvuru Formu
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong style="color:#00e5ff;">
+        DONUTSMP82
+    </strong>
+
+    <br><br>
+
+    © 2026 DonutSMP82 • Tüm hakları saklıdır.
+
+</footer>
+
+
+<!-- AUTH MODAL -->
+
+<div class="modal" id="authModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2 id="authTitle">
+                Giriş Yap
+            </h2>
+
+            <span class="close"
+                  onclick="closeAuth()">
+                ×
+            </span>
+
+        </div>
+
+
+        <div class="form">
+
+            <input
+                id="username"
+                class="input"
+                placeholder="Kullanıcı adı"
+                autocomplete="off"
+            >
+
+            <input
+                id="password"
+                type="password"
+                class="input"
+                placeholder="Şifre"
+            >
+
+            <button
+                class="btn btn-primary"
+                onclick="submitAuth()"
+                id="authSubmit"
+            >
+                Giriş Yap
+            </button>
+
+            <button
+                class="btn btn-dark"
+                onclick="toggleAuth()"
+                id="authToggle"
+            >
+                Hesabım yok, kayıt ol
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================
+   DONUTSMP82 WEBSITE SYSTEM
+========================================= */
+
+let isRegister = false;
+
+let currentUser =
+    localStorage.getItem("donut_current_user");
+
+
+/* ---------- HELPERS ---------- */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    setTimeout(()=>{
+        toast.style.display = "none";
+    },2500);
+}
+
+
+/* ---------- IP ---------- */
+
+function copyIP(){
+
+    navigator.clipboard.writeText(
+        "donutsmp82.aternos.me"
+    );
+
+    showToast("Sunucu IP adresi kopyalandı!");
+}
+
+
+/* ---------- AUTH MODAL ---------- */
+
+function openAuth(){
+
+    document
+        .getElementById("authModal")
+        .classList.add("active");
+
+}
+
+function closeAuth(){
+
+    document
+        .getElementById("authModal")
+        .classList.remove("active");
+
+}
+
+function toggleAuth(){
+
+    isRegister = !isRegister;
+
+    document.getElementById("authTitle")
+        .textContent =
+        isRegister ? "Kayıt Ol" : "Giriş Yap";
+
+    document.getElementById("authSubmit")
+        .textContent =
+        isRegister ? "Kayıt Ol" : "Giriş Yap";
+
+    document.getElementById("authToggle")
+        .textContent =
+        isRegister
+        ? "Zaten hesabım var, giriş yap"
+        : "Hesabım yok, kayıt ol";
+
+}
+
+
+/* ---------- ACCOUNT DATABASE ---------- */
+
+function getUsers(){
+
+    return JSON.parse(
+        localStorage.getItem("donut_users") || "{}"
+    );
+
+}
+
+function saveUsers(users){
+
+    localStorage.setItem(
+        "donut_users",
+        JSON.stringify(users)
+    );
+
+}
+
+
+/* ---------- LOGIN / REGISTER ---------- */
+
+function submitAuth(){
+
+    const username =
+        document.getElementById("username")
+        .value.trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    if(!username || !password){
+
+        showToast("Kullanıcı adı ve şifre gerekli!");
+        return;
+
+    }
+
+    if(username.length < 3){
+
+        showToast("Kullanıcı adı en az 3 karakter olmalı!");
+        return;
+
+    }
+
+    const users = getUsers();
+
+
+    /* REGISTER */
+
+    if(isRegister){
+
+        if(users[username]){
+
+            showToast("Bu kullanıcı adı zaten kayıtlı!");
+            return;
+
+        }
+
+        users[username] = {
+
+            password:password,
+
+            credits:100,
+
+            tickets:[],
+
+            purchases:[]
+
+        };
+
+        saveUsers(users);
+
+        currentUser = username;
+
+        localStorage.setItem(
+            "donut_current_user",
+            username
+        );
+
+        showToast(
+            "Hesap oluşturuldu! 100 kredi kazandın."
+        );
+
+        closeAuth();
+
+        updateAccount();
+
+        return;
+
+    }
+
+
+    /* LOGIN */
+
+    if(!users[username]){
+
+        showToast("Bu hesap bulunamadı!");
+        return;
+
+    }
+
+    if(users[username].password !== password){
+
+        showToast("Şifre yanlış!");
+        return;
+
+    }
+
+    currentUser = username;
+
+    localStorage.setItem(
+        "donut_current_user",
+        username
+    );
+
+    showToast("Başarıyla giriş yaptın!");
+
+    closeAuth();
+
+    updateAccount();
+
+}
+
+
+/* ---------- UPDATE ACCOUNT ---------- */
+
+function updateAccount(){
+
+    const loggedOut =
+        document.getElementById("loggedOut");
+
+    const accountInfo =
+        document.getElementById("accountInfo");
+
+    if(!currentUser){
+
+        loggedOut.style.display = "block";
+        accountInfo.style.display = "none";
+
+        return;
+
+    }
+
+    const users = getUsers();
+
+    const user = users[currentUser];
+
+    if(!user){
+
+        logout();
+        return;
+
+    }
+
+    loggedOut.style.display = "none";
+    accountInfo.style.display = "block";
+
+    document.getElementById("profileName")
+        .textContent = currentUser;
+
+    document.getElementById("avatar")
+        .textContent =
+        currentUser.charAt(0).toUpperCase();
+
+    document.getElementById("creditAmount")
+        .textContent = user.credits;
+
+    renderTickets();
+
+}
+
+
+/* ---------- LOGOUT ---------- */
+
+function logout(){
+
+    currentUser = null;
+
+    localStorage.removeItem(
+        "donut_current_user"
+    );
+
+    updateAccount();
+
+    showToast("Çıkış yapıldı.");
+
+}
+
+
+/* ---------- BUY RANK ---------- */
+
+function buyRank(rank,price){
+
+    if(!currentUser){
+
+        showToast(
+            "Satın almak için önce giriş yap!"
+        );
+
+        openAuth();
+
+        return;
+
+    }
+
+    const users = getUsers();
+
+    const user = users[currentUser];
+
+
+    if(user.credits < price){
+
+        showToast(
+            "Yeterli kredin yok!"
+        );
+
+        return;
+
+    }
+
+    user.credits -= price;
+
+    user.purchases.push({
+
+        rank:rank,
+
+        price:price,
+
+        date:new Date().toLocaleString("tr-TR")
+
+    });
+
+    saveUsers(users);
+
+    updateAccount();
+
+    showToast(
+        rank + " satın alındı!"
+    );
+
+}
+
+
+/* ---------- TICKET ---------- */
+
+function createTicket(){
+
+    if(!currentUser){
+
+        showToast(
+            "Ticket açmak için giriş yap!"
+        );
+
+        openAuth();
+
+        return;
+
+    }
+
+    const input =
+        document.getElementById("ticketText");
+
+    const text =
+        input.value.trim();
+
+    if(!text){
+
+        showToast(
+            "Ticket mesajı boş olamaz!"
+        );
+
+        return;
+
+    }
+
+    const users = getUsers();
+
+    users[currentUser].tickets.push({
+
+        message:text,
+
+        date:new Date().toLocaleString("tr-TR"),
+
+        status:"Açık"
+
+    });
+
+    saveUsers(users);
+
+    input.value = "";
+
+    renderTickets();
+
+    showToast(
+        "Ticket oluşturuldu!"
+    );
+
+}
+
+
+/* ---------- RENDER TICKETS ---------- */
+
+function renderTickets(){
+
+    const list =
+        document.getElementById("ticketList");
+
+    if(!currentUser){
+
+        list.innerHTML =
+            "<p style='color:#68748a;font-size:13px;'>Ticketlarını görmek için giriş yap.</p>";
+
+        return;
+
+    }
+
+    const users = getUsers();
+
+    const tickets =
+        users[currentUser].tickets || [];
+
+    if(tickets.length === 0){
+
+        list.innerHTML =
+            "<p style='color:#68748a;font-size:13px;'>Henüz ticket oluşturmadın.</p>";
+
+        return;
+
+    }
+
+    list.innerHTML = tickets
+        .map((ticket,index)=>`
+
+            <div class="ticket">
+
+                <strong>
+                    #${index + 1}
+                </strong>
+
+                <p style="margin:8px 0;color:#b5bfd0;">
+                    ${escapeHTML(ticket.message)}
+                </p>
+
+                <small>
+                    ${ticket.date} •
+                    <span style="color:#39ff88;">
+                        ${ticket.status}
+                    </span>
+                </small>
+
+            </div>
+
+        `)
+        .join("");
+
+}
+
+
+/* ---------- SECURITY FOR TICKET TEXT ---------- */
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ---------- START ---------- */
+
+updateAccount();
+
+
+/* ENTER KEY */
+
+document
+    .getElementById("password")
+    .addEventListener("keydown",function(e){
+
+        if(e.key === "Enter"){
+
+            submitAuth();
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
